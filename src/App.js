@@ -1,6 +1,7 @@
 import SortableTree, {changeNodeAtPath, removeNodeAtPath} from 'react-sortable-tree-patch-react-17';
 import 'react-sortable-tree-patch-react-17/style.css';
 import {useState} from "react";
+import generateRandomAnimal from 'random-animal-name';
 
 
 function App() {
@@ -66,11 +67,11 @@ function App() {
                                             treeData,
                                             path,
                                             getNodeKey,
-                                            newNode: {...node, title: 'Booyah I changed'},
+                                            newNode: {...node, title: generateRandomAnimal()},
                                         })
                                     )}
                                 >
-                                    Rename
+                                    Randomize Name
                                 </button>,
                                 <button
                                     onClick={() =>

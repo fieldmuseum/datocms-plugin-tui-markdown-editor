@@ -11,7 +11,9 @@
     "random-animal-name": "^0.1.0",
     "random-animals": "^1.0.3",
     "react": "^17.0.2",
+    "react-async-hook": "^3.6.2",
     "react-dom": "^17.0.2",
+    "react-json-editor-ajrm": "^2.5.13",
     "react-scripts": "4.0.3",
     "react-sortable-tree-patch-react-17": "^2.9.0",
     "web-vitals": "^1.0.1"

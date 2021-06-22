@@ -1,6 +1,6 @@
 import SortableTree, {addNodeUnderParent, changeNodeAtPath, removeNodeAtPath} from 'react-sortable-tree-patch-react-17';
 import 'react-sortable-tree-patch-react-17/style.css';
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {useAsync} from 'react-async-hook';
 
 import DatoCmsPlugin from 'datocms-plugins-sdk';
@@ -12,32 +12,8 @@ const getNodeKey = ({treeIndex}) => treeIndex;
 const sampleTree = [
     {
         id: 1,
-        title: 'my sample poswwewefwft',
-        slug: '/my-sample-post',
-        children: [
-            {
-                id: 5,
-                title: 'my child',
-                slug: '/my-child',
-                children: [
-                    {
-                        id: 6,
-                        title: 'my grandeeechild',
-                        slug: '/my-grandchild'
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        id: 2,
-        title: 'my sample post 2',
-        slug: '/my-sample-post-2'
-    },
-    {
-        id: 3,
-        title: 'my sample post 3',
-        slug: '/my-sample-post-3'
+        title: 'Placeholder',
+        slug: '/placehoder',
     }
 ];
 
@@ -46,9 +22,23 @@ export default function App() {
 
     DatoCmsPlugin.init(plugin => {
         plugin.startAutoResizer();
-        // setTreeData(JSON.parse(plugin.getFieldValue(plugin.fieldPath)));
+    })
 
-    });
+    useEffect(() => {
+            DatoCmsPlugin.init(plugin => {
+                setTreeData(JSON.parse(plugin.getFieldValue(plugin.fieldPath)))
+            })
+        }, []
+    )
+
+
+    const sendTreeToDato = async newTree => {
+        DatoCmsPlugin.init(plugin => {
+            plugin.setFieldValue(plugin.fieldPath, JSON.stringify(newTree))
+        }).then(() =>
+            setTreeData(newTree)
+        )
+    }
 
     return (
         <>
@@ -59,12 +49,12 @@ export default function App() {
                 {!treeData ? "Loading, please wait..." :
                     <SortableTree
                         treeData={treeData}
-                        onChange={setTreeData}
+                        onChange={sendTreeToDato}
                         generateNodeProps={({node, path}) => {
 
                             return ({
                                 title: <input value={node.title}
-                                              onChange={event => setTreeData(
+                                              onChange={event => sendTreeToDato(
                                                   changeNodeAtPath({
                                                       treeData,
                                                       path,
@@ -86,8 +76,7 @@ export default function App() {
                                                 getNodeKey
                                             });
 
-                                            console.log(modifiedTree);
-                                            setTreeData(modifiedTree.treeData);
+                                            sendTreeToDato(modifiedTree.treeData);
                                         }
                                         }
                                     >
@@ -95,7 +84,7 @@ export default function App() {
                                     </button>,
                                     <button
                                         onClick={() =>
-                                            setTreeData(
+                                            sendTreeToDato(
                                                 removeNodeAtPath({
                                                     treeData,
                                                     path,

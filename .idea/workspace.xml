@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9361fbf1-672e-4c22-a3aa-0d296d5b79be" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +71,7 @@
       <workItem from="1624054631110" duration="1832000" />
       <workItem from="1624288386964" duration="24000" />
       <workItem from="1624392160825" duration="635000" />
-      <workItem from="1624395961926" duration="8403000" />
+      <workItem from="1624395961926" duration="9507000" />
     </task>
     <task id="LOCAL-00001" summary="random names, fix project highlighting">
       <created>1624055597601</created>
@@ -89,7 +87,14 @@
       <option name="project" value="LOCAL" />
       <updated>1624397094940</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="working with local state but not yet with dato data">
+      <created>1624404662319</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1624404662319</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -108,7 +113,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="random names, fix project highlighting" />
     <MESSAGE value="functional tie to dato" />
-    <option name="LAST_COMMIT_MESSAGE" value="functional tie to dato" />
+    <MESSAGE value="working with local state but not yet with dato data" />
+    <option name="LAST_COMMIT_MESSAGE" value="working with local state but not yet with dato data" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

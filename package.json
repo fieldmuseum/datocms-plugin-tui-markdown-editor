@@ -6,6 +6,7 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "datocms-plugins-sdk": "^0.1.1",
     "randimals": "^2.0.2",
     "random-animal-name": "^0.1.0",
     "random-animals": "^1.0.3",

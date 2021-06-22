@@ -1,7 +1,8 @@
 import SortableTree, {changeNodeAtPath, removeNodeAtPath} from 'react-sortable-tree-patch-react-17';
 import 'react-sortable-tree-patch-react-17/style.css';
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import generateRandomAnimal from 'random-animal-name';
+import DatoCmsPlugin from 'datocms-plugins-sdk';
 
 
 function App() {
@@ -36,70 +37,88 @@ function App() {
             slug: "/my-sample-post-3"
         },
     ];
-
     const [treeData, setTreeData] = useState(availablePosts);
+    const [isLoading, setLoading] = useState(true);
+    const [datoData, setDatoData] = useState();
+
     const getNodeKey = ({treeIndex}) => treeIndex;
 
+    useEffect(() => {
+            DatoCmsPlugin.init(function (plugin) {
+                plugin.startAutoResizer()
+                setDatoData({parameters: plugin.parameters, field: plugin.field});
+                setLoading(false);
+            })
+        }, [datoData]
+    )
+
     return (
-        <>
+        <pre>
+                {isLoading ? "Loading, please wait..." : JSON.stringify(datoData, null, 2)};
+            </pre>
 
-            <div style={{height: 300}}>
-                <SortableTree
-                    treeData={treeData}
-                    onChange={setTreeData}
-                    generateNodeProps={({node, path}) => {
-
-                        return ({
-                            title: <input value={node.title}
-                                          onChange={event => setTreeData(
-                                              changeNodeAtPath({
-                                                  treeData,
-                                                  path,
-                                                  getNodeKey,
-                                                  newNode: {...node, title: event.target.value},
-                                              })
-                                          )}
-                            />,
-                            buttons: [
-                                <button
-                                    onClick={() => setTreeData(
-                                        changeNodeAtPath({
-                                            treeData,
-                                            path,
-                                            getNodeKey,
-                                            newNode: {...node, title: generateRandomAnimal()},
-                                        })
-                                    )}
-                                >
-                                    Randomize Name
-                                </button>,
-                                <button
-                                    onClick={() =>
-                                        setTreeData(
-                                            removeNodeAtPath({
-                                                treeData,
-                                                path,
-                                                getNodeKey
-                                            })
-                                        )
-                                    }
-                                >
-                                    Remove
-                                </button>
-                            ]
-                        })
-                    }
-}
-/>
+        /* <>
 
 
-</div>
+             <div style={{height: 300}}>
+                 <SortableTree
+                     treeData={treeData}
+                     onChange={setTreeData}
+                     generateNodeProps={({node, path}) => {
 
-<pre>
-                    {JSON.stringify(treeData, null, 2)}
-                        </pre>
-</>
-)
+                         return ({
+                             title: <input value={node.title}
+                                           onChange={event => setTreeData(
+                                               changeNodeAtPath({
+                                                   treeData,
+                                                   path,
+                                                   getNodeKey,
+                                                   newNode: {...node, title: event.target.value},
+                                               })
+                                           )}
+                             />,
+                             buttons: [
+                                 <button
+                                     onClick={() => setTreeData(
+                                         changeNodeAtPath({
+                                             treeData,
+                                             path,
+                                             getNodeKey,
+                                             newNode: {...node, title: generateRandomAnimal()},
+                                         })
+                                     )}
+                                 >
+                                     Randomize Name
+                                 </button>,
+                                 <button
+                                     onClick={() =>
+                                         setTreeData(
+                                             removeNodeAtPath({
+                                                 treeData,
+                                                 path,
+                                                 getNodeKey
+                                             })
+                                         )
+                                     }
+                                 >
+                                     Remove
+                                 </button>
+                             ]
+                         })
+                     }
+                     }
+                 />
+
+
+             </div>
+
+             <pre>
+                     {JSON.stringify(treeData, null, 2)}
+                         </pre>
+         </>*/
+    )
+
+        ;
 }
 
 export default App;

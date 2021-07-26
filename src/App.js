@@ -1,114 +1,66 @@
-import SortableTree, {addNodeUnderParent, changeNodeAtPath, removeNodeAtPath} from 'react-sortable-tree-patch-react-17';
-import 'react-sortable-tree-patch-react-17/style.css';
-import {useEffect, useState} from "react";
-import {useAsync} from 'react-async-hook';
-
+import {useEffect, useRef, useState} from "react";
+import '@toast-ui/editor/dist/toastui-editor.css';
+import {Editor} from '@toast-ui/react-editor';
 import DatoCmsPlugin from 'datocms-plugins-sdk';
-import JSONInput from 'react-json-editor-ajrm';
-import locale from 'react-json-editor-ajrm/locale/en';
-
-const getNodeKey = ({treeIndex}) => treeIndex;
-
-const sampleTree = [
-    {
-        id: 1,
-        title: 'Placeholder',
-        slug: '/placehoder',
-    }
-];
 
 export default function App() {
-    const [treeData, setTreeData] = useState(sampleTree);
+  const [treeData, setTreeData] = useState();
 
+  DatoCmsPlugin.init(plugin => {
+    plugin.startAutoResizer();
+  })
+
+  useEffect(() => {
+      DatoCmsPlugin.init(plugin => {
+        const fieldData = plugin.getFieldValue(plugin.fieldPath);
+        console.log('fieldData', fieldData);
+        setTreeData(fieldData)
+      })
+    }, []
+  )
+
+
+  const sendTreeToDato = async newTree => {
     DatoCmsPlugin.init(plugin => {
-        plugin.startAutoResizer();
-    })
-
-    useEffect(() => {
-            DatoCmsPlugin.init(plugin => {
-                setTreeData(JSON.parse(plugin.getFieldValue(plugin.fieldPath)))
-            })
-        }, []
+      plugin.setFieldValue(plugin.fieldPath, newTree)
+    }).then(() => {
+        console.log('newTree', newTree);
+        setTreeData(newTree)
+      }
     )
+  }
 
+  const changeHandler = () => {
+    const markdown = editorRef.current.getInstance().getMarkdown();
+    console.log('markdown changed', markdown);
+    sendTreeToDato(markdown);
+  }
 
-    const sendTreeToDato = async newTree => {
-        DatoCmsPlugin.init(plugin => {
-            plugin.setFieldValue(plugin.fieldPath, JSON.stringify(newTree))
-        }).then(() =>
-            setTreeData(newTree)
-        )
-    }
+  const editorRef = useRef();
 
-    return (
-        <>
-            <h1>Tree Output</h1>
+  return (
+    <>
+      <h1>Toast UI Editor</h1>
+      {!treeData ? 'Loading, please wait...' :
 
-            <div style={{height: 1000}}>
+        <Editor
+          previewStyle="tab"
+          height="auto"
+          minHeight="400px"
+          initialEditType="wysiwyg"
+          initialValue={treeData}
+          ref={editorRef}
+          // onFocus={this.handleFocus}
+          onChange={changeHandler}
+        />
 
-                {!treeData ? "Loading, please wait..." :
-                    <SortableTree
-                        treeData={treeData}
-                        onChange={sendTreeToDato}
-                        generateNodeProps={({node, path}) => {
+      }
+      <h1>Raw Output</h1>
+      {!treeData ? "Loading, please wait..." :
+        <pre>{treeData}</pre>
+      }
 
-                            return ({
-                                title: <input value={node.title}
-                                              onChange={event => sendTreeToDato(
-                                                  changeNodeAtPath({
-                                                      treeData,
-                                                      path,
-                                                      getNodeKey,
-                                                      newNode: {...node, title: event.target.value},
-                                                  })
-                                              )}
-                                />,
-                                buttons: [
-                                    <button
-                                        onClick={() => {
-                                            const newId = node.id++;
-                                            const modifiedTree = addNodeUnderParent({
-                                                treeData,
-                                                parentKey: path[path.length - 1],
-                                                newNode: {id: newId, title: `New node ${newId}`},
-                                                expandParent: true,
-                                                addAsFirstChild: true,
-                                                getNodeKey
-                                            });
-
-                                            sendTreeToDato(modifiedTree.treeData);
-                                        }
-                                        }
-                                    >
-                                        Add +
-                                    </button>,
-                                    <button
-                                        onClick={() =>
-                                            sendTreeToDato(
-                                                removeNodeAtPath({
-                                                    treeData,
-                                                    path,
-                                                    getNodeKey
-                                                })
-                                            )
-                                        }
-                                    >
-                                        Del -
-                                    </button>
-                                ]
-                            })
-                        }}
-                    />
-                }
-
-            </div>
-
-            <h1>JSON Output</h1>
-            {!treeData ? "Loading, please wait..." :
-                <pre>{JSON.stringify(treeData, null, 2)}</pre>
-            }
-
-        </>
-    )
+    </>
+  )
 
 }

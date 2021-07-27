@@ -1,65 +1,83 @@
-import {useEffect, useRef, useState} from "react";
-import '@toast-ui/editor/dist/toastui-editor.css';
-import {Editor} from '@toast-ui/react-editor';
-import DatoCmsPlugin from 'datocms-plugins-sdk';
+import {useEffect, useRef, useState} from "react"
+import '@toast-ui/editor/dist/toastui-editor.css'
+import {Editor} from '@toast-ui/react-editor' // https://github.com/nhn/tui.editor/tree/master/apps/react-editor#-usage
+import DatoCmsPlugin from 'datocms-plugins-sdk'
 
 export default function App() {
-  const [treeData, setTreeData] = useState();
-
-  DatoCmsPlugin.init(plugin => {
-    plugin.startAutoResizer();
-  })
+  const [editorData, setEditorData] = useState()
+  const editorRef = useRef()
 
   useEffect(() => {
-      DatoCmsPlugin.init(plugin => {
-        const fieldData = plugin.getFieldValue(plugin.fieldPath);
-        console.log('fieldData', fieldData);
-        setTreeData(fieldData)
-      })
-    }, []
-  )
-
-
-  const sendTreeToDato = async newTree => {
     DatoCmsPlugin.init(plugin => {
-      plugin.setFieldValue(plugin.fieldPath, newTree)
+      const fieldData = plugin.getFieldValue(plugin.fieldPath)
+      setEditorData(fieldData)
+      plugin.startAutoResizer()
+    })
+
+  }, [])
+
+
+  const uploadEditorData = async (newEditorData) => {
+    DatoCmsPlugin.init(plugin => {
+      plugin.setFieldValue(plugin.fieldPath, newEditorData)
     }).then(() => {
-        console.log('newTree', newTree);
-        setTreeData(newTree)
+        setEditorData(newEditorData)
       }
     )
   }
 
   const changeHandler = () => {
-    const markdown = editorRef.current.getInstance().getMarkdown();
-    console.log('markdown changed', markdown);
-    sendTreeToDato(markdown);
+    const rawMarkdown = editorRef.current.getInstance().getMarkdown()
+    uploadEditorData(rawMarkdown)
   }
 
-  const editorRef = useRef();
+  function customImageUploader() {
+    const button = document.createElement('button');
+
+    button.className = 'toastui-editor-toolbar-icons last';
+    button.type = 'button';
+    // button.style.backgroundImage = 'none';
+    // button.style.margin = '0';
+    button.innerHTML = `<i>B</i>`;
+    button.addEventListener('click', () => {
+      editorRef.current.getInstance().exec('bold');
+    });
+
+    return button;
+  }
+
 
   return (
     <>
-      <h1>Toast UI Editor</h1>
-      {!treeData ? 'Loading, please wait...' :
+      {!editorData ? 'Loading field data from DatoCMS. Please wait...' :
 
+        // Available options: https://nhn.github.io/tui.editor/latest/ToastUIEditorCore
         <Editor
-          previewStyle="tab"
-          height="auto"
-          minHeight="400px"
+          previewStyle="vertical"
+          height="500px"
           initialEditType="wysiwyg"
-          initialValue={treeData}
+          initialValue={editorData}
           ref={editorRef}
-          // onFocus={this.handleFocus}
           onChange={changeHandler}
+          toolbarItems={
+            // Toolbar customization: https://nhn.github.io/tui.editor/latest/tutorial-example15-customizing-toolbar-buttons
+            [
+              [
+ /*               {
+                  // Custom toolbar button: https://github.com/nhn/tui.editor/blob/master/docs/en/toolbar.md
+                  name: 'myItem',
+                  tooltip: 'myItem',
+                  command: "image",
+                  text: '@',
+                  className: 'toastui-editor-toolbar-icons',
+                  style: {backgroundImage: 'none', color: 'red'}
+                },*/
+                'heading', 'bold', 'italic', 'strike', 'code', 'ul', 'ol', 'link', 'image', 'indent', 'outdent', 'quote', 'codeblock', 'hr', 'table'
+              ]
+            ]
+          }
         />
-
       }
-      <h1>Raw Output</h1>
-      {!treeData ? "Loading, please wait..." :
-        <pre>{treeData}</pre>
-      }
-
     </>
   )
 

@@ -5,7 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9361fbf1-672e-4c22-a3aa-0d296d5b79be" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +84,7 @@
       <workItem from="1624395961926" duration="10501000" />
       <workItem from="1624482751894" duration="602000" />
       <workItem from="1627079503175" duration="2531000" />
-      <workItem from="1627402332971" duration="8422000" />
+      <workItem from="1627402332971" duration="10962000" />
     </task>
     <task id="LOCAL-00001" summary="random names, fix project highlighting">
       <created>1624055597601</created>
@@ -127,7 +128,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627410837929</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Button parity with Dato editor">
+      <created>1627410887648</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1627410887648</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -150,7 +158,8 @@
     <MESSAGE value="It works!!" />
     <MESSAGE value="Cleanup" />
     <MESSAGE value="Functional minus image" />
-    <option name="LAST_COMMIT_MESSAGE" value="Functional minus image" />
+    <MESSAGE value="Button parity with Dato editor" />
+    <option name="LAST_COMMIT_MESSAGE" value="Button parity with Dato editor" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

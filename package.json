@@ -1,7 +1,31 @@
 {
   "name": "datocms-plugin-tui-markdown-editor",
   "version": "0.1.0",
-  "private": true,
+  "homepage": "https://github.com/YOUR-USER/datocms-plugin-datocms-plugin-demo",
+  "description": "ToastUI Editor-based replacement for DatoCMS's default markdown editor (SimpleMDE). Features a better WYSIWYG mode.",
+  "main": "index.js",
+  "keywords": [
+    "datocms",
+    "datocms-plugin",
+    "field-editor",
+    "text-field",
+    "markdown",
+    "toastui",
+    "toast-ui",
+    "tui",
+    "simplemde"
+  ],
+  "author": "arcataroger <arcataroger@gmail.com>",
+  "datoCmsPlugin": {
+    "title": "DatoCMS Toast UI Markdown Editor Plugin",
+    "previewImage": "docs/preview.gif",
+    "coverImage": "docs/cover.png",
+    "entryPoint": "dist/index.html",
+    "pluginType": "field_editor",
+    "fieldTypes": [
+      "text"
+    ]
+  },
   "dependencies": {
     "@toast-ui/react-editor": "^3.0.1",
     "datocms-plugins-sdk": "^0.1.1",

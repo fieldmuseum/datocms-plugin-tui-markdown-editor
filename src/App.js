@@ -31,22 +31,6 @@ export default function App() {
     uploadEditorData(rawMarkdown)
   }
 
-  function customImageUploader() {
-    const button = document.createElement('button');
-
-    button.className = 'toastui-editor-toolbar-icons last';
-    button.type = 'button';
-    // button.style.backgroundImage = 'none';
-    // button.style.margin = '0';
-    button.innerHTML = `<i>B</i>`;
-    button.addEventListener('click', () => {
-      editorRef.current.getInstance().exec('bold');
-    });
-
-    return button;
-  }
-
-
   return (
     <>
       {!editorData ? 'Loading field data from DatoCMS. Please wait...' :
@@ -72,7 +56,8 @@ export default function App() {
                   className: 'toastui-editor-toolbar-icons',
                   style: {backgroundImage: 'none', color: 'red'}
                 },*/
-                'heading', 'bold', 'italic', 'strike', 'code', 'ul', 'ol', 'link', 'image', 'indent', 'outdent', 'quote', 'codeblock', 'hr', 'table'
+                'heading', 'bold', 'italic', 'strike', 'code', 'ul', 'ol', 'link',
+                // 'image', 'indent', 'outdent', 'quote', 'codeblock', 'hr', 'table'
               ]
             ]
           }

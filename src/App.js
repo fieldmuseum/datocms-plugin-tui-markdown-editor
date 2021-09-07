@@ -9,10 +9,13 @@ export default function App() {
 
   useEffect(() => {
     DatoCmsPlugin.init(plugin => {
-      const fieldData = plugin.getFieldValue(plugin.fieldPath)
+      const fieldData = plugin.getFieldValue(plugin.fieldPath) || ''
       setEditorData(fieldData)
       plugin.startAutoResizer()
+      console.log('plugin', plugin)
+      console.log('fieldData', fieldData)
     })
+
 
   }, [])
 
@@ -33,7 +36,7 @@ export default function App() {
 
   return (
     <>
-      {!editorData ? 'Loading field data from DatoCMS. Please wait...' :
+      {typeof(editorData) !== 'string' ? 'Loading field data from DatoCMS. Please wait...' :
 
         // Available options: https://nhn.github.io/tui.editor/latest/ToastUIEditorCore
         <Editor
@@ -46,19 +49,7 @@ export default function App() {
           toolbarItems={
             // Toolbar customization: https://nhn.github.io/tui.editor/latest/tutorial-example15-customizing-toolbar-buttons
             [
-              [
- /*               {
-                  // Custom toolbar button: https://github.com/nhn/tui.editor/blob/master/docs/en/toolbar.md
-                  name: 'myItem',
-                  tooltip: 'myItem',
-                  command: "image",
-                  text: '@',
-                  className: 'toastui-editor-toolbar-icons',
-                  style: {backgroundImage: 'none', color: 'red'}
-                },*/
-                'heading', 'bold', 'italic', 'strike', 'code', 'ul', 'ol', 'link',
-                // 'image', 'indent', 'outdent', 'quote', 'codeblock', 'hr', 'table'
-              ]
+              ['bold', 'italic', 'strike', 'ul', 'ol', 'link',]
             ]
           }
         />

@@ -6,8 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="9361fbf1-672e-4c22-a3aa-0d296d5b79be" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,7 +86,7 @@
       <workItem from="1627079503175" duration="2531000" />
       <workItem from="1627402332971" duration="11656000" />
       <workItem from="1627572766238" duration="2000" />
-      <workItem from="1631048346771" duration="1368000" />
+      <workItem from="1631048346771" duration="2221000" />
     </task>
     <task id="LOCAL-00001" summary="random names, fix project highlighting">
       <created>1624055597601</created>
@@ -145,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1627421616304</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Working prototype">
+      <created>1631049996632</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1631049996632</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -170,7 +176,8 @@
     <MESSAGE value="Functional minus image" />
     <MESSAGE value="Button parity with Dato editor" />
     <MESSAGE value="Updated package.json with datoCMS plugin scaffolding" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated package.json with datoCMS plugin scaffolding" />
+    <MESSAGE value="Working prototype" />
+    <option name="LAST_COMMIT_MESSAGE" value="Working prototype" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

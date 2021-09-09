@@ -49,7 +49,7 @@ export default function App() {
           toolbarItems={
             // Toolbar customization: https://nhn.github.io/tui.editor/latest/tutorial-example15-customizing-toolbar-buttons
             [
-              ['bold', 'italic', 'strike', 'ul', 'ol', 'link',]
+              ['bold', 'italic', 'strike', 'ul', 'ol', 'link', 'table']
             ]
           }
         />
